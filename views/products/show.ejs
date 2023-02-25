@@ -1,0 +1,20 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="row">
+    <div class="col-lg-6 product-card">
+            <div class="card text-center shadow mt-3 mx-auto" style="width: 18rem;">
+                <img class="img" src="<%=foundProduct.img%>" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h3 class="card-title"> <%= foundProduct.name %> </h3>
+                  <h5 class="card-title"> Rs: <%= foundProduct.price %> </h5>
+                  <p class="card-text"> <%= foundProduct.desc %> </p>
+                  <a href="#" class="btn btn-primary">Buy Product</a>
+                </div>
+            </div>
+    </div>
+
+    <div class="col-lg-6">
+        <h2 class="disply-5">Leave your review</h2>
+    </div>
+
+</div>
