@@ -18,8 +18,21 @@
             </div>
     </div>
 
-    <div class="col-lg-6">
+    <div class="col-lg-4">
         <h2 class="display-5">Leave your review</h2>
+        <form action="/products/<%= foundProduct._id %>/review" method="POST">
+
+          <div class="mt-3">
+            <label for="rate" class="form-label">Rating: </label>
+            <input type="range" name="rating" min="0" max="5" id="rate" class="form-control">
+          </div>
+          <div class="mt-3">
+            <label for="chal" class="form-label">Comments: </label>
+            <textarea name="comment" id="chal"  rows="5"></textarea>
+          </div>
+          <button class="btn btn-sm btn-success">Add review</button>
+
+        </form>
     </div>
 
 </div>

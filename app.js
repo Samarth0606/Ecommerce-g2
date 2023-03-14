@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 const seedDB = require('./seed');
 const productRoutes = require("./routes/productRoutes");
 const ejsMate = require('ejs-mate');
-const methodOverride = require('method-override')
+const methodOverride = require('method-override');
+const reviewRoutes = require("./routes/review");
 
  
 
@@ -29,7 +30,9 @@ app.use(methodOverride('_method'))
 // seeding dummy data
 // seedDB();
 
-app.use(productRoutes);
+// router
+app.use(productRoutes); 
+app.use(reviewRoutes);
 
 const port = 5000;
 app.listen(port,()=>{
