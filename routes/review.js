@@ -17,7 +17,7 @@ router.post('/products/:productId/review' , async(req,res)=>{
     await product.save()
     await review.save()
 
-    res.send('review  route');
+    res.redirect(`/products/${productId}`);
 })
 
 

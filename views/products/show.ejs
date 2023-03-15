@@ -33,6 +33,23 @@
           <button class="btn btn-sm btn-success">Add review</button>
 
         </form>
+
+        <div class="my-3">
+          <%for(let review of foundProduct.reviews){%>
+          <div class="card">
+            <div class="card-header">Rating: <%=review.rating%> </div>
+            <div class="card-body">
+              <p class="card-text">Comment: <%=review.comment%> </p>
+              <a href="#" class="btn btn-danger">Delete</a>
+            </div>
+          </div>
+        <%}%>
+
+
+        </div>
+
+
+
     </div>
 
 </div>
