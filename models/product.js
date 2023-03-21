@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Review = require('./review');
 
 const productSchema = new mongoose.Schema({
     name:{
@@ -29,5 +30,18 @@ const productSchema = new mongoose.Schema({
         }
     ]
 })
+
+
+productSchema.post('findOneAndDelete' , function(product){
+
+    if(product.reviews.length > 0){
+        Review.deleteMany({_id:{$in:product.reviews}})
+    }
+    
+})
+
+
+
+
 let Product = mongoose.model('Product' , productSchema);
 module.exports = Product;

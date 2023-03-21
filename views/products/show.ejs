@@ -56,6 +56,9 @@
                 Rated: <%=review.rating%> stars
               </p>
               <p class="card-text">Comment: <%=review.comment%> </p>
+              <%if(review.createdAt){%>
+                <p> <%= review.createdAt.toDateString() %></p>
+              <%}%>
               <a href="#" class="btn btn-danger">Delete</a>
             </div>
           </div>
