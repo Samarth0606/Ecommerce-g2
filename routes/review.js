@@ -1,31 +1,39 @@
-const express =  require('express');
+const express = require('express');
+const router = express.Router();
 const Product = require('../models/product');
 const Review = require('../models/review');
-const router = express.Router();
+const { validateReview } = require('../middleware');
 
-router.post('/products/:productId/review' , async(req,res)=>{
 
-    try{
-            // console.log(req.body);
-        let {productId} = req.params;
-        let {rating, comment} = req.body;
-        const review = new  Review({rating, comment});
-        const product = await Product.findById(productId);
+router.post('/products/:productid/review',validateReview,async(req, res) => {
+
+
+    try {
+        const { productid } = req.params;
+        const { rating, comment } = req.body;
+
+        const product = await Product.findById(productid);
+
+        const review = new Review({ rating, comment });
+
+        // Average Rating Logic
+        const newAverageRating = ((product.avgRating * product.reviews.length) + parseInt(rating)) / (product.reviews.length + 1);
+        product.avgRating = parseFloat(newAverageRating.toFixed(1));
+
         product.reviews.push(review);
 
-        console.log(product);
-        console.log(review);
-        
-        await product.save()
-        await review.save()
+        await review.save();
+        await product.save();
 
-        res.redirect(`/products/${productId}`);
+        req.flash('success', 'Added your review successfully!');
+        res.redirect(`/products/${productid}`);
     }
-    catch(e){
-        res.render('error' , {err: e.message} )
+
+    catch (e) {
+        res.status(500).render('error', { err: e.message });
     }
     
-})
+});
 
 
 

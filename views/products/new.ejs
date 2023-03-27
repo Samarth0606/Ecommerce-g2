@@ -1,55 +1,41 @@
-<% layout('layouts/boilerplate') %>
+<% layout('layouts/boilerplate') -%>
 
 
 <div class="row">
-    <div class="col-6 mx-auto">
-        <form action="/products" method="POST" class='needs-validation' novalidate>
+    <div class="col-md-6 mx-auto">
+        <form action="/products" method="POST" class="validated-form" novalidate>
             <div class="mb-3">
-                <label for="naam" class="form-label">Name: </label>
-                <input type="text" class="form-control" name="name" id="naam" placeholder="Name of Product" required>
+                <label class="form-label" for="name">Name : </label>
+                <input class="form-control" type="text" name="name" id="name" placeholder="Product Name" required>
                 <div class="valid-feedback">
                     Looks good!
                 </div>
-                <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                    Please choose a product name.
-                  </div>
-            
             </div>
             <div class="mb-3">
-                <label for="imge" class="form-label">Image Url: </label>
-                <input type="text" class="form-control" name="img" id="imge" placeholder="Image URL of Product" required>
+                <label for="img" class="form-label">Image URL</label>
+                <input class="form-control" type="text" name="img" id="img" placeholder="Product Image URL" required>
                 <div class="valid-feedback">
                     Looks good!
-                </div>
-                <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                    Please choose a image.
-                  </div>
-            
-            </div>
-            <div class="mb-3">
-                <label for="paisa" class="form-label">Price: </label>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">Rs. </span>
-                    <input class="form-control" type="number" name="price" step="any" id="paisa" placeholder="Price of Product" required>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                    <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                        Please choose a price.
-                      </div>
                 </div>
             </div>
         
             <div class="mb-3">
-                <label for="des" class="form-label">Description: </label>
-                <textarea class="form-control"  name="desc" id="des" rows="5" placeholder="Description of Product" required></textarea>
+                <label for="price" class="form-label">Price</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">$</span>
+                    <input type="text" name="price" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                      </div>
+                </div>  
+            </div>
+        
+            <div class="mb-3">
+                <label class="form-label" for="desc">Description</label>
+                <textarea class="form-control" name="desc" id="desc" rows="5" required></textarea>
                 <div class="valid-feedback">
                     Looks good!
                 </div>
-                <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                    Please choose a Description.
-                  </div>
-            
             </div>
             <button type="submit" class="btn btn-sm btn-success">Add</button>
         </form>
@@ -57,23 +43,3 @@
 </div>
 
 
-<script>
-    (() => {
-  'use strict'
-
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  const forms = document.querySelectorAll('.needs-validation')
-
-  // Loop over them and prevent submission
-  Array.from(forms).forEach(form => {
-    form.addEventListener('submit', event => {
-      if (!form.checkValidity()) {
-        event.preventDefault()
-        event.stopPropagation()
-      }
-
-      form.classList.add('was-validated')
-    }, false)
-  })
-})()
-</script>
