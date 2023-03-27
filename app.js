@@ -41,11 +41,13 @@ app.use((req, res, next) => {
 // Routes
 const productRoutes = require('./routes/product');
 const reviewRoutes = require('./routes/review');
+const authRoutes = require('./routes/auth');
 
 
 
 app.use(productRoutes);
 app.use(reviewRoutes);
+app.use(authRoutes);
 
 
 const port = 5000;
