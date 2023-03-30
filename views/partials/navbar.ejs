@@ -12,16 +12,25 @@
         <li class="nav-item">
           <a class="nav-link" href="/products">Products</a>
         </li>
+        <%if(currentUser && currentUser.role === 'seller'){%>
         <li class="nav-item">
           <a class="nav-link" href="/products/new" tabindex="-1" aria-disabled="true">New</a>
         </li>
+        <%}%>
       </ul>
       <div class="navbar-nav ml-auto">
-          <a href="#" class="nav-link">Login</a> 
-          <a href="#" class="nav-link"><i class="fas fa-shopping-cart"></i> 
-            <sup><span class="badge bg-danger">2</span></sup> 
+
+        <%if(!currentUser){%>
+          <a href="/login" class="nav-link">Login</a> 
+        <%} else{%>
+          <a href="#" class="nav-link text-capitalize">Hello <%=currentUser.username%></i> 
+            <a href="/user/cart" class="nav-link"><i class="fas fa-shopping-cart"></i> 
+            <sup><span class="badge bg-danger"><%=currentUser.cart.length%></span></sup> 
           </a>
-          <a href="#" class="nav-link">Logout</a>
+          <a href="/logout" class="nav-link">Logout</a>
+        <%}%>
+
+              
       </div>
       
     </div>

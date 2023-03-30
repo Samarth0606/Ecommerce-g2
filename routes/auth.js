@@ -23,10 +23,21 @@ router.get('/register' , (req,res)=>{
 })
 
 router.post('/register' , async(req,res)=>{
-    let {email,username,password} = req.body;
-    const user = new User({email,username});
-    const newUser = await User.register(user,password);
-    res.send(newUser);
+    try{
+        let {email,username,password,role} = req.body;
+        const user = new User({email,username,role});
+        const newUser = await User.register(user,password);
+        // res.send(newUser);
+        req.login(newUser, function(err) {
+            if (err) { return next(err); }
+            req.flash('success' , 'welcome, you are registered successfully')
+            return res.redirect('/products');
+        });
+    }
+    catch(e){
+        req.flash('error' , e.message);
+        return res.redirect('/products');
+    }
 })
 
 router.get('/login' , (req,res)=>{
@@ -41,8 +52,9 @@ router.post('/login',
     }),
     function(req, res) {
         // console.log(req.user);
-        req.flash('success' , `welcome back ${req.user.username}`)
-        res.redirect('/products');
+        req.flash('success' , `welcome back ${req.user.username}`);
+        // console.log(req.session);
+        res.redirect(`/products`);
     }
 );
 
@@ -51,7 +63,7 @@ router.get('/logout',(req,res)=>{
         req.logout();
     }
     req.flash('success' , 'goodbye friend');
-    res.redirect('/products');
+    res.redirect('/login');
 });
 
 module.exports = router;
